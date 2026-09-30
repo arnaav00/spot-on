@@ -1,0 +1,9 @@
+{
+  "database": { "rules": "database.rules.json" },
+  "hosting": {
+    "target": "spot-on",
+    "public": "out",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [{ "source": "**", "destination": "/index.html" }]
+  }
+}

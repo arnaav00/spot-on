@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "whoonu-online"
+  },
+  "targets": {
+    "whoonu-online": {
+      "hosting": {
+        "spot-on": [
+          "spot-online"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
