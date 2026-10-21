@@ -170,7 +170,6 @@ export const POP_CULTURE_WORDS = [
   "Avatar: the Last Airbender",
   "Toy Story",
   "Finding Nemo",
-  "Cars",
   "The Incredibles",
   "Monsters, Inc.",
   "The Avengers",
@@ -202,8 +201,8 @@ export const POP_CULTURE_WORDS = [
   "Kim Jong Un",
   "Julius Caesar",
   "Abraham Lincoln",
-  "George Washington",
   "Vincent Van Gogh",
+  "Alexander Hamilton",
   "Mozart",
   "Beethoven",
   "Adolf Hitler",
@@ -219,10 +218,6 @@ export const POP_CULTURE_WORDS = [
   "Lewis Hamilton",
   "Max Verstappen",
   "David Attenborough",
-  "Malala Yousafzai",
-  "Greta Thunberg",
-  "Pope Francis",
-  "Volodymyr Zelenskyy",
   "Netanyahu",
   "Beyblades"
 ] as const;

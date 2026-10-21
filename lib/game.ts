@@ -140,7 +140,7 @@ export async function setTotalGames(db: Database, code: string, playerId: string
     room.totalGames = nextTotal;
     return touch(room);
   }, { applyLocally: false });
-  if (!result.committed) throw new Error("Only the host can change the number of games.");
+  if (!result.committed) throw new Error("Only the host can change the number of rounds.");
 }
 
 export async function setExpansions(db: Database, code: string, playerId: string, expansionIds: string[]) {
@@ -177,7 +177,7 @@ export async function joinRoom(db: Database, code: string, playerId: string, nam
     }
     if (!room) { error = "Room not found. Check the code and try again."; return; }
     room.playerOrder ??= Object.keys(room.players ?? {});
-    if (room.phase !== "lobby") { error = "That game has already started."; return; }
+    if (room.phase !== "lobby") { error = "That room has already started."; return; }
     if (room.playerOrder.length >= 6 && !room.players[playerId]) { error = "That room is full."; return; }
     if (!room.players[playerId]) room.playerOrder.push(playerId);
     room.players[playerId] = {
@@ -211,7 +211,7 @@ const dealForRound = (room: Room, rankerId: string) => {
 
 export async function startGame(db: Database, code: string, playerId: string) {
   logEvent("game.start.request", { code, playerId: shortId(playerId) });
-  let error = "Could not start the game.";
+  let error = "Could not start the first round.";
   const result = await runTransaction(ref(db, `rooms/${code}`), (room: Room | null) => {
     if (!room || room.hostId !== playerId || room.phase !== "lobby") return;
     if (room.playerOrder.length < 3) { error = "You need at least 3 players."; return; }
@@ -262,7 +262,7 @@ export async function reshuffleHand(db: Database, code: string, playerId: string
     const player = room.players[playerId];
     if (!player || player.submitted) return;
     room.reshuffledPlayers ??= {};
-    if (room.reshuffledPlayers[playerId]) { error = "You have already reshuffled this game."; return; }
+    if (room.reshuffledPlayers[playerId]) { error = "You have already reshuffled this round."; return; }
     room.deck ??= [];
     room.discard ??= [];
     player.hand ??= [];
@@ -458,7 +458,7 @@ const removePlayer = (room: Room, playerId: string): Room | null => {
   room.playerOrder = room.playerOrder.filter((id) => id !== playerId);
   if (room.presence) delete room.presence[playerId];
   if (!room.playerOrder.length) return null;
-  room.notice = { id: `${Date.now()}-${playerId}`, message: `${leavingName} has left the game.`, at: Date.now() };
+  room.notice = { id: `${Date.now()}-${playerId}`, message: `${leavingName} has left the room.`, at: Date.now() };
   if (wasHost) room.hostId = nextRemainingPlayer(oldOrder, playerId, room.playerOrder);
   delete room.readyPlayers[playerId];
   delete room.reshuffledPlayers[playerId];
