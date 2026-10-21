@@ -2,7 +2,7 @@ import { Database, get, onDisconnect, onValue, ref, remove, runTransaction, set,
 import { logError, logEvent, logWarn, shortId } from "./debug";
 import { buildDeck, sanitizeExpansionIds } from "./expansions";
 
-export type Phase = "lobby" | "submitting" | "ranking" | "reveal" | "intermission" | "finished";
+export type Phase = "lobby" | "submitting" | "ranking" | "reveal" | "intermission" | "finished" | "abandoned";
 
 export type Player = {
   id: string;
@@ -37,6 +37,7 @@ export type Room = {
   reshuffledPlayers: Record<string, boolean>;
   scoreAnimationAt?: number;
   notice?: { id: string; message: string; at: number };
+  terminalMessage?: string;
   createdAt: number;
   lastActiveAt: number;
 };
@@ -463,6 +464,14 @@ const removePlayer = (room: Room, playerId: string): Room | null => {
   delete room.readyPlayers[playerId];
   delete room.reshuffledPlayers[playerId];
 
+  if (room.playerOrder.length < 3) {
+    delete room.players[playerId];
+    room.phase = "abandoned";
+    room.terminalMessage = "Not enough players to continue. Returning everyone to Join a room.";
+    room.rankerId = null;
+    return room;
+  }
+
   if (room.phase === "reveal" && room.revealedCount >= room.ranking.length) {
     if (wasRanker) delete room.players[playerId];
     if (room.playerOrder.every((id) => room.readyPlayers[id])) beginScoreAnimation(room);
@@ -516,6 +525,7 @@ export async function leaveRoom(db: Database, code: string, playerId: string) {
     return updated ? touch(updated) : null;
   }, { applyLocally: false });
   logEvent("room.leave.result", { code, playerId: shortId(playerId), committed: result.committed });
+  return result.snapshot.val()?.phase === "abandoned";
 }
 
 export async function registerPresence(db: Database, code: string, playerId: string, connectionId: string) {
