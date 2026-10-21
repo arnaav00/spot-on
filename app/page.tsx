@@ -18,8 +18,8 @@ const SESSION_KEY = "spot-on-session";
 
 async function copyRoomInvite(room: Room) {
   const url = "https://spot-online.web.app/";
-  const plain = `If you're receiving this message, you have nothing better to do but sit and play a game of Spot On! with your friends.\n\n${url}\n\nROOM CODE: *${room.code}*`;
-  const html = `If you're receiving this message, you have nothing better to do but sit and play a game of Spot On! with your friends.<br><br><a href="${url}">${url}</a><br><br><strong>ROOM CODE: ${room.code}</strong>`;
+  const plain = `If you're receiving this message, you have nothing better to do but sit and play a game of Spot On! with your friends.\n${url}\n\nROOM CODE: *${room.code}*`;
+  const html = `If you're receiving this message, you have nothing better to do but sit and play a game of Spot On! with your friends.<br><a href="${url}">${url}</a><br><br><strong>ROOM CODE: ${room.code}</strong>`;
   if (typeof ClipboardItem !== "undefined" && navigator.clipboard.write) {
     await navigator.clipboard.write([new ClipboardItem({ "text/plain": new Blob([plain], { type: "text/plain" }), "text/html": new Blob([html], { type: "text/html" }) })]);
   } else await navigator.clipboard.writeText(plain);

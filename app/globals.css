@@ -167,7 +167,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .instruction { margin-bottom: 21px; }
 .instruction p, .play-panel > p { margin: 0; color: white; font-weight: 700; }
 .play-panel > h1, .instruction h1 { color: white; }
-.choice-actions { width: min(100%, 390px); display: grid; grid-template-columns: minmax(0, 3fr) minmax(76px, 1fr); gap: 10px; margin-top: 35px; }
+.choice-actions { width: min(100%, 390px); display: grid; grid-template-columns: minmax(0, 2.6fr) minmax(76px, 1fr); gap: 16px; margin-top: 35px; }
 .choice-actions .confirm-button { width: 100%; min-width: 0; margin: 0; padding-inline: 8px; font-size: clamp(.78rem, 3.3vw, 1rem) !important; }
 .reshuffle-button { display: grid; justify-items: center; align-content: center; gap: 3px; min-width: 0; min-height: 54px; padding: 5px; border: 1.5px solid white; border-radius: 15px; background: white; color: #071a1b; font-size: .78rem; font-weight: 950; cursor: pointer; box-shadow: 0 8px 0 #055d60, 0 16px 28px rgba(5,93,96,.24); transition: transform .16s, box-shadow .16s; }
 .reshuffle-button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 0 #055d60, 0 20px 30px rgba(5,93,96,.27); }
