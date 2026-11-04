@@ -189,7 +189,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .identity-fields input:focus { border-color: #079ca1; box-shadow: 0 0 0 4px rgba(7,156,161,.15); }
 .identity-fields label:nth-child(2) input { text-align: center; letter-spacing: .22em; font-size: 1.15rem; font-weight: 1000; text-transform: uppercase; }
 .identity-dialog-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: min(100%, 320px); margin-inline: auto; }
-.identity-dialog-actions > button { width: 100%; min-height: 48px; border-radius: 13px; font-weight: 900; }
+.identity-dialog-actions > button { box-sizing: border-box; width: 100% !important; height: 48px !important; min-height: 48px !important; padding: 0 12px !important; border-radius: 13px; font-weight: 900; }
 .reshuffle-dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 7px; }
 .reshuffle-dialog-actions > button { min-height: 44px; border-radius: 12px; font-weight: 900; }
 .reshuffle-dialog-actions > button:first-child { border-color: #9bdcdd; color: #071a1b; }
