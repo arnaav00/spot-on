@@ -130,7 +130,9 @@ button { -webkit-tap-highlight-color: transparent; }
 .expansion-picker:hover { border-color: #079ca1; transform: translateY(-1px); }
 .expansion-picker strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .85rem; }
 .player-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; text-align: left; }
-.player-chip { display: grid; grid-template-columns: 43px 1fr auto; align-items: center; gap: 10px; min-width: 0; padding: 10px; border: 1px solid #9bdcdd; border-radius: 16px; background: white; box-shadow: 0 5px 14px rgba(7,26,27,.06); }
+.player-chip { display: grid; grid-template-columns: 43px minmax(0, 1fr) auto auto; align-items: center; gap: 10px; min-width: 0; padding: 10px; border: 1px solid #9bdcdd; border-radius: 16px; background: white; box-shadow: 0 5px 14px rgba(7,26,27,.06); }
+.edit-player-button { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid #9bdcdd; border-radius: 10px; background: #dff8f8; color: #067f83; cursor: pointer; }
+.edit-player-button svg { width: 16px; height: 16px; }
 .player-chip .avatar, .avatar { display: grid; place-items: center; width: 43px; height: 43px; border-radius: 15px 12px 17px 13px; background: #079ca1; color: white; font-weight: 1000; }
 .avatar { overflow: hidden; flex: none; letter-spacing: .015em; }
 .avatar.avatar-color-0 { background: #d94f70; color: white; }
@@ -178,6 +180,16 @@ button { -webkit-tap-highlight-color: transparent; }
 .reshuffle-dialog { width: min(calc(100% - 24px), 370px) !important; padding: 22px !important; border: 2px solid #9bdcdd !important; border-radius: 22px !important; background: white !important; color: #071a1b !important; }
 .reshuffle-dialog h2 { color: #071a1b; font-size: 1.16rem; font-weight: 1000; }
 .reshuffle-dialog [data-slot="dialog-description"] { color: #3e595a; font-size: .9rem; font-weight: 750; }
+.identity-dialog { width: min(calc(100% - 24px), 420px) !important; border: 2px solid #9bdcdd !important; border-radius: 22px !important; padding: clamp(20px, 6vw, 28px) !important; background: white !important; color: #071a1b !important; }
+.identity-dialog h2 { color: #067f83; font-size: 1.35rem; font-weight: 1000; }
+.identity-dialog [data-slot="dialog-description"] { color: #52696a; font-weight: 700; }
+.identity-fields { display: grid; gap: 13px; margin: 17px 0; text-align: left; }
+.identity-fields label { display: grid; gap: 7px; color: #263f40; font-size: .88rem; font-weight: 900; }
+.identity-fields input { width: 100%; min-height: 48px; padding: 10px 13px; border: 2px solid #9bdcdd; border-radius: 13px; outline: none; background: white; color: #071a1b; font: inherit; }
+.identity-fields input:focus { border-color: #079ca1; box-shadow: 0 0 0 4px rgba(7,156,161,.15); }
+.identity-fields label:nth-child(2) input { text-align: center; letter-spacing: .22em; font-size: 1.15rem; font-weight: 1000; text-transform: uppercase; }
+.identity-dialog-actions { display: grid; grid-template-columns: 1fr 1.25fr; gap: 10px; }
+.identity-dialog-actions > button { min-height: 48px; border-radius: 13px; font-weight: 900; }
 .reshuffle-dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 7px; }
 .reshuffle-dialog-actions > button { min-height: 44px; border-radius: 12px; font-weight: 900; }
 .reshuffle-dialog-actions > button:first-child { border-color: #9bdcdd; color: #071a1b; }
@@ -469,6 +481,9 @@ button { -webkit-tap-highlight-color: transparent; }
   .reveal-tile-list { gap: 8px; }
   .reveal-tile { grid-template-columns: 40px minmax(0, 1fr) 42px; gap: 8px; min-height: 58px; padding: 7px 8px; }
   .final-leaderboard .reveal-tile { grid-template-columns: 40px 42px minmax(0, 1fr) 34px; }
+  .final-leaderboard .reveal-tile strong { font-size: .96rem; font-weight: 800; }
+  .final-leaderboard .reveal-tile b { font-size: 1rem; }
+  .finish-screen > h1 { font-size: clamp(1.4rem, 5.2vw, 1.8rem); font-weight: 850; }
   .reveal-rank { width: 37px; height: 37px; border-radius: 11px; font-size: .82rem; }
   .reveal-tile .avatar { width: 42px; height: 42px; border-radius: 12px; font-size: .66rem; }
   .reveal-tile.round-winner { min-height: 70px; margin-inline: -2px; padding-inline: 10px; }

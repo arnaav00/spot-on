@@ -144,6 +144,22 @@ export async function setTotalGames(db: Database, code: string, playerId: string
   if (!result.committed) throw new Error("Only the host can change the number of rounds.");
 }
 
+export async function updatePlayerIdentity(db: Database, code: string, playerId: string, name: string, initials: string) {
+  const nextName = cleanName(name);
+  const nextInitials = cleanInitials(initials);
+  if (!nextName) throw new Error("Forgetting something?");
+  if (!nextInitials) throw new Error("Please add your initials.");
+  logEvent("player.identity.request", { code, playerId: shortId(playerId), name: nextName, initials: nextInitials });
+  const result = await runTransaction(ref(db, `rooms/${code}`), (room: Room | null) => {
+    if (!room || room.phase !== "lobby" || !room.players?.[playerId]) return;
+    room.players[playerId].name = nextName;
+    room.players[playerId].initials = nextInitials;
+    return touch(room);
+  }, { applyLocally: false });
+  if (!result.committed) throw new Error("Your details can only be changed while you are in the lobby.");
+  logEvent("player.identity.complete", { code, playerId: shortId(playerId) });
+}
+
 export async function setExpansions(db: Database, code: string, playerId: string, expansionIds: string[]) {
   const selectedIds = sanitizeExpansionIds(expansionIds);
   logEvent("room.expansions.request", { code, playerId: shortId(playerId), expansionIds: selectedIds });
@@ -464,6 +480,11 @@ const removePlayer = (room: Room, playerId: string): Room | null => {
   delete room.readyPlayers[playerId];
   delete room.reshuffledPlayers[playerId];
 
+  if (room.phase === "lobby" || room.phase === "finished") {
+    delete room.players[playerId];
+    return room;
+  }
+
   if (room.playerOrder.length < 3) {
     delete room.players[playerId];
     room.phase = "abandoned";
@@ -478,7 +499,7 @@ const removePlayer = (room: Room, playerId: string): Room | null => {
     return room;
   }
 
-  if (room.phase === "lobby" || room.phase === "intermission" || room.phase === "finished") {
+  if (room.phase === "intermission") {
     delete room.players[playerId];
     return room;
   }

@@ -368,7 +368,7 @@ export const BASE_GAME_WORDS = [
   "Matching Outfits",
   "Pajamas",
   "Crocs",
-  "Looking Through a Microscopes",
+  "Looking Through a Microscope",
   "Samurai",
   "Esports",
   "True Crime Documentaries",
