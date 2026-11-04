@@ -363,12 +363,14 @@ button { -webkit-tap-highlight-color: transparent; }
 .pass-visual i:nth-child(1) { top: 10px; left: 10px; }.pass-visual i:nth-child(2) { top: 10px; right: 10px; }.pass-visual i:nth-child(3) { bottom: 9px; left: 26px; }
 .pass-visual::after { content: ""; position: absolute; inset: 19px; border: 2px dashed #079ca1; border-radius: 50%; }
 .finish-visual svg { width: 47px; height: 47px; color: #079ca1; filter: drop-shadow(0 5px 0 #87d7d9); }
-.confirm-leave-dialog { width: min(calc(100% - 24px), 430px) !important; max-width: 430px !important; border-radius: 23px !important; border-color: rgba(255,255,255,.7) !important; padding: clamp(20px, 6vw, 28px) !important; color: white !important; }
-.confirm-leave-dialog h2, .confirm-leave-dialog [data-slot="dialog-description"], .confirm-leave-dialog [data-slot="dialog-close"] { color: white !important; }
-.confirm-leave-dialog .confirm-leave-actions > button:first-child { border-color: white !important; background: white !important; color: #067f83 !important; }
+.confirm-leave-dialog { width: min(calc(100% - 24px), 430px) !important; max-width: 430px !important; border: 2px solid #9bdcdd !important; border-radius: 23px !important; padding: clamp(20px, 6vw, 28px) !important; background: white !important; color: #071a1b !important; box-shadow: 0 16px 0 #87d7d9, 0 30px 70px rgba(5,93,96,.22) !important; }
+.confirm-leave-dialog h2 { color: #067f83 !important; }
+.confirm-leave-dialog [data-slot="dialog-description"] { color: #52696a !important; }
+.confirm-leave-dialog [data-slot="dialog-close"] { color: #067f83 !important; }
+.confirm-leave-dialog .confirm-leave-actions > button:first-child { border: 1.5px solid #9bdcdd !important; background: white !important; color: #067f83 !important; }
 .confirm-leave-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .confirm-leave-dialog button { min-height: 46px; border-radius: 13px; font-weight: 900; }
-.leave-confirm { background: #c92f50 !important; color: white !important; }
+.leave-confirm { border-color: #c92f50 !important; background: #c92f50 !important; color: white !important; }
 .restore-screen { align-content: center; gap: 25px; color: white; font-weight: 900; }
 
 .intermission-shell { display: grid; place-items: center; padding: 20px; overflow: hidden; }
